@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EtherBridge
+namespace MyApp
 {
     internal class Program
     {
