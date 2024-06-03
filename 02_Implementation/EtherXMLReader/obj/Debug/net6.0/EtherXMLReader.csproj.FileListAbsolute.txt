@@ -1,0 +1,12 @@
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\bin\Debug\net6.0\EtherXMLReader.deps.json
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\bin\Debug\net6.0\EtherXMLReader.dll
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\bin\Debug\net6.0\EtherXMLReader.pdb
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\EtherXMLReader.csproj.AssemblyReference.cache
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\EtherXMLReader.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\EtherXMLReader.AssemblyInfoInputs.cache
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\EtherXMLReader.AssemblyInfo.cs
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\EtherXMLReader.csproj.CoreCompileInputs.cache
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\EtherXMLReader.dll
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\refint\EtherXMLReader.dll
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\EtherXMLReader.pdb
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherXMLReader\obj\Debug\net6.0\ref\EtherXMLReader.dll
