@@ -1,6 +1,0 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/02_Implementation/EtherBridge/obj/Debug/net6.0
-/.vs

@@ -6,12 +6,12 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "EtherXMLReader/1.0.0": {
+      "EtherBridge/1.0.0": {
         "dependencies": {
-          "System.Xml.XDocument": "4.3.0"
+          "EtherXMLReader": "1.0.0"
         },
         "runtime": {
-          "EtherXMLReader.dll": {}
+          "EtherBridge.dll": {}
         }
       },
       "Microsoft.NETCore.Platforms/1.1.0": {},
@@ -199,11 +199,19 @@
           "System.Threading": "4.3.0",
           "System.Xml.ReaderWriter": "4.3.0"
         }
+      },
+      "EtherXMLReader/1.0.0": {
+        "dependencies": {
+          "System.Xml.XDocument": "4.3.0"
+        },
+        "runtime": {
+          "EtherXMLReader.dll": {}
+        }
       }
     }
   },
   "libraries": {
-    "EtherXMLReader/1.0.0": {
+    "EtherBridge/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -375,6 +383,11 @@
       "sha512": "sha512-5zJ0XDxAIg8iy+t4aMnQAu0MqVbqyvfoUVl1yDV61xdo3Vth45oA2FoY4pPkxYAH5f8ixpmTqXeEIya95x0aCQ==",
       "path": "system.xml.xdocument/4.3.0",
       "hashPath": "system.xml.xdocument.4.3.0.nupkg.sha512"
+    },
+    "EtherXMLReader/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

@@ -1,34 +1,46 @@
-﻿using System.Xml;
-
+﻿using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace EtherXMLReader
 {
     public class XMLReader
     {
+        private readonly string _clientsParam = "Clients";
+        private readonly string _clientParam = "Client";
+        private readonly string _byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
 
-        private XmlTextReader? _reader;
 
-        public XmlTextReader Reader
+        private XDocument? _document;
+
+        public XDocument Document
         {
-            get { return _reader; }
+            get { return _document; }
         }
         public XMLReader(string xml)         
         {
-            _reader = new XmlTextReader(xml);
+            
+            _document = XDocument.Load(xml);
+            
+            
+
         }
 
-        public List<string> GetClients()
+        public List<XMLClients> GetClients()
         {
-            List<string> clients = new List<string>();
+            List<XMLClients> clients = new List<XMLClients>();
 
-            if (_reader != null)
+            if (_document != null)
             {
-                _reader.Read();
-                while (_reader.Read())
+                var xClients = _document.Descendants(_clientParam).ToList();
+               
+
+                foreach ( var xclient in xClients)
                 {
-                    var result = _reader.MoveToElement();
-                    clients.Add(result.ToString());
+                    XMLClients client = new XMLClients(xclient);
+                    clients.Add(client);
                 }
+
             }
 
             return clients;
