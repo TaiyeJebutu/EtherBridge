@@ -8,9 +8,9 @@ namespace MyApp
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            EtherXMLReader.XMLReader xmlReader = new XMLReader("example_network_config.xml");
+            EtherXMLReader.XMLReader xmlReader = new XMLReader("icd_config.xml");
             
-            var result = xmlReader.GetClients();
+            xmlReader.GetICDMessages();
         }
     }
 }

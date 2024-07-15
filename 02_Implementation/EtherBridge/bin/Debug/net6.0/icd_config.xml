@@ -1,0 +1,9 @@
+<!-- Clients to be mirrored for EtherBridge-->
+<ICD>
+  <Messages>
+    <Message name = "Square" header ="10">
+      <Field name = "Height" startingbit = "1" endingbit = "2" format = "Twos Compliment" customformat = "Null" resolution = "2"></Field>
+      <Field name = "Length" startingbit = "3" endingbit = "4" format = "Twos Compliment" customformat = "Null" resolution = "2"></Field>
+    </Message>
+  </Messages>
+</ICD>
