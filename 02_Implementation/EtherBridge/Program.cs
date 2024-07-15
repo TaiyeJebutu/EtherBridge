@@ -1,4 +1,5 @@
 ﻿using System;
+using EtherBridge;
 using EtherXMLReader;
 
 namespace MyApp
@@ -10,7 +11,12 @@ namespace MyApp
             Console.WriteLine("Hello World!");
             EtherXMLReader.XMLReader xmlReader = new XMLReader("icd_config.xml");
             
-            xmlReader.GetICDMessages();
+            List<XMLICDMessage> icdMessages =  xmlReader.GetICDMessages();
+            Translator translator = new Translator(icdMessages);
+
+            TranslatedMessage result = translator.TranslateMessage("10101101");
+
+            Console.WriteLine("Hello World!");
         }
     }
 }

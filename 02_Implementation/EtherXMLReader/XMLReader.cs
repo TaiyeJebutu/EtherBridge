@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Text;
 using System.Xml;
 using System.Xml.Linq;
 
@@ -29,8 +30,10 @@ namespace EtherXMLReader
         }
 
 
-        public void GetICDMessages()
+        public List<XMLICDMessage> GetICDMessages()
         {
+            List < XMLICDMessage > icdMessages = new List<XMLICDMessage> ();
+
             if (_document != null)
             {
                 var messages = _document.Descendants(_MessagesParam).ToList();
@@ -71,11 +74,12 @@ namespace EtherXMLReader
                         XMLFields msgField = new XMLFields(fieldName, startingbit, endingbit, format, customformat, resolution);
                         fieldsList.Add(msgField);
                     }
-                    XMLICDMessages msg = new XMLICDMessages(msgName, msgHeader, fieldsList);
+                    XMLICDMessage msg = new XMLICDMessage(msgName, msgHeader, fieldsList);
 
-                    var done = "";
+                    icdMessages.Add(msg);
                 }
             }
+            return icdMessages;
         }
 
         public List<XMLClients> GetClients()

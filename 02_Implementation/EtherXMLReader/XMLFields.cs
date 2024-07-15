@@ -9,12 +9,12 @@ namespace EtherXMLReader
 {
     public class XMLFields
     {
-        private string ?_name;        
-        private string ?_startingbit;
-        private string ?_endingbit;
-        private string ?_format;
-        private string ?_customformat;
-        private string ?_resolution;
+        public string ?_name;
+        public string ?_startingbit;
+        public string ?_endingbit;
+        public string ?_format;
+        public string ?_customformat;
+        public string ?_resolution;
 
         public XMLFields(string fieldName,string startingbit, string endingbit,
                          string? format, string? customformat, string? resolution)
