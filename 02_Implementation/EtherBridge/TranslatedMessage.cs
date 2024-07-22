@@ -8,17 +8,17 @@ namespace EtherBridge
 {
     public class TranslatedMessage
     {
-        private string _name;
-        private Dictionary<string, string> _fields = new Dictionary<string, string>();
+        public string name;
+        public Dictionary<string, string> fields = new Dictionary<string, string>();
 
-        public TranslatedMessage(string name) 
-        { 
-            _name = name;
+        public TranslatedMessage(string messageName) 
+        {
+            name = messageName;
         }
 
         public void AddResult(string fieldName, string value)
         {
-            _fields[fieldName] = value;
+            fields[fieldName] = value;
         }
 
     }
