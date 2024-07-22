@@ -1,0 +1,25 @@
+{
+    "Tests":
+    [         
+        {
+        "TestName" : "Test that exact values have been receieved",
+        "Assertion": {
+            "type" : "Equality",
+            "messagename": "Square",
+            "fieldname": "Height",
+            "fieldvalue": "30"
+            }
+        },
+        {
+            "TestName" : "Test that exact values have been receieved",
+            "Assertion": {
+                "type" : "Range",
+                "messagename": "Square",
+                "fieldname": "Height",
+                "lessthan": "20",
+                "greaterthan": "5"
+                }
+            }
+    ]    
+      
+}

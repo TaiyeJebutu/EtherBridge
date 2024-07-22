@@ -27,8 +27,15 @@ namespace EtherBridge
 
                 foreach (String table in tables)
                 {
-                    sqlite_cmd.CommandText = table;
-                    sqlite_cmd.ExecuteNonQuery();
+                    try
+                    {
+                        sqlite_cmd.CommandText = table;
+                        sqlite_cmd.ExecuteNonQuery();
+                    }catch (SqliteException ex)
+                    {
+                        //
+                    }
+                    
                 }
                 conn.Close();
                 

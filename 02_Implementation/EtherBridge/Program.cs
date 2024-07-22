@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Common;
+using System.Reflection;
 using EtherBridge;
 using EtherXMLReader;
 using Microsoft.Data.Sqlite;
@@ -36,8 +37,13 @@ namespace MyApp
             dBManager.CreateTable(tables);
 
             dBManager.AddTranslatedMessage(result);
-            
-            
+
+            // Test values in database
+
+            JSONTester tester = new JSONTester(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+
+
+
 
             Console.WriteLine("Hello World!");
         }
