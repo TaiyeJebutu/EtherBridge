@@ -40,3 +40,4 @@ C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherBridg
 C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherBridge\bin\Debug\net6.0\runtimes\win-arm64\native\e_sqlite3.dll
 C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherBridge\bin\Debug\net6.0\runtimes\win-x64\native\e_sqlite3.dll
 C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherBridge\bin\Debug\net6.0\runtimes\win-x86\native\e_sqlite3.dll
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\EtherBridge\bin\Debug\net6.0\Newtonsoft.Json.dll

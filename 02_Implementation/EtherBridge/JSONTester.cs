@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace EtherBridge
         private List<string> _testFileLocations = new List<string>();
         private string _dir;
         private Regex _regex = new Regex("test.*json$");
+        public List<JSONTest> Tests  = new List<JSONTest>();
 
         public JSONTester(string dir) 
         { 
@@ -29,6 +31,23 @@ namespace EtherBridge
                     _testFileLocations.Add(match);
                 }
             }
+        }
+
+        public void DeserialiseTests()
+        {
+            foreach (string file in _testFileLocations)
+            {
+                List<JSONTest> tests = JsonConvert.DeserializeObject<List<JSONTest>>(File.ReadAllText(file));
+                foreach (JSONTest test in tests)
+                {
+                    Tests.Add(test);
+                }
+            }
+        }
+
+        public void RunTests()
+        {
+
         }
     }
 }

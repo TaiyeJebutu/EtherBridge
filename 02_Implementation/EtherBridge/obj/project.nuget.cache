@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "BLbN5uRywBtXJ73cbktNMOjUmXgt+kVqxUXhD15yeg6XFltZveWLuWGI58EfJISHnrwzYOt/ygESnVAwRfHZug==",
+  "dgSpecHash": "TSx+4mzzhLSCirOi1QD2sFcHIcBrAGpdSbUrdHrx21D8Cz2KLd+KraePby3FBLb50X690RAoG3MVy94XTvUHzQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\taiye\\source\\repos\\TaiyeJebutu\\EtherBridge\\02_Implementation\\EtherBridge\\EtherBridge.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "C:\\Users\\taiye\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.7\\microsoft.data.sqlite.core.8.0.7.nupkg.sha512",
     "C:\\Users\\taiye\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\taiye\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
+    "C:\\Users\\taiye\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\taiye\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.6\\sqlitepclraw.bundle_e_sqlite3.2.1.6.nupkg.sha512",
     "C:\\Users\\taiye\\.nuget\\packages\\sqlitepclraw.core\\2.1.6\\sqlitepclraw.core.2.1.6.nupkg.sha512",
     "C:\\Users\\taiye\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.6\\sqlitepclraw.lib.e_sqlite3.2.1.6.nupkg.sha512",

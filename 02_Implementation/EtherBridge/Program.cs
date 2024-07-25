@@ -41,7 +41,8 @@ namespace MyApp
             // Test values in database
 
             JSONTester tester = new JSONTester(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
-
+            tester.DeserialiseTests();
+            tester.RunTests();
 
 
 
