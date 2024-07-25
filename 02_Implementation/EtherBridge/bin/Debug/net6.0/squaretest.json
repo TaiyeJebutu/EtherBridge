@@ -16,7 +16,7 @@
             "Assertion": {
                 "type" : "Range",
                 "messagename": "Square",
-                "fieldname": "Height",
+                "fieldname": "Length",
                 "lessthan": "20",
                 "greaterthan": "5"
                     }

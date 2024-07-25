@@ -96,5 +96,28 @@ namespace EtherBridge
             return table;
 
         }
+
+
+        public bool Query(string query)
+        {
+            using (var conn = new SqliteConnection($"Data Source={DBManager._database}"))
+            {                
+                conn.Open();
+                SqliteCommand sqlite_cmd =  new SqliteCommand(query, conn);              
+                
+                long count = (long)sqlite_cmd.ExecuteScalar();
+                conn.Close();
+
+                if (count > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+        }
     }
 }

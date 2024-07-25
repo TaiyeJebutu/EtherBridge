@@ -12,7 +12,7 @@ namespace MyApp
         static void Main(string[] args)
         {
             // Read message icd
-            Console.WriteLine("Hello World!");
+            
             EtherXMLReader.XMLReader xmlReader = new XMLReader("icd_config.xml");
             
             // Generate internal message ICD
@@ -40,13 +40,13 @@ namespace MyApp
 
             // Test values in database
 
-            JSONTester tester = new JSONTester(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location));
+            JSONTester tester = new JSONTester(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), dBManager);
             tester.DeserialiseTests();
             tester.RunTests();
 
 
 
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("\nProgram Ended");
         }
 
 
