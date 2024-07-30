@@ -1,0 +1,15 @@
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\bin\Debug\net6.0\VRForces.exe
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\bin\Debug\net6.0\VRForces.deps.json
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\bin\Debug\net6.0\VRForces.runtimeconfig.json
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\bin\Debug\net6.0\VRForces.dll
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\bin\Debug\net6.0\VRForces.pdb
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.csproj.AssemblyReference.cache
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.AssemblyInfoInputs.cache
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.AssemblyInfo.cs
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.csproj.CoreCompileInputs.cache
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.dll
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\refint\VRForces.dll
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.pdb
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\VRForces.genruntimeconfig.cache
+C:\Users\taiye\source\repos\TaiyeJebutu\EtherBridge\02_Implementation\VRForces\obj\Debug\net6.0\ref\VRForces.dll
