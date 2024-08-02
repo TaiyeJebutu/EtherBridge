@@ -39,7 +39,8 @@ namespace EtherBridge
                 }
                 conn.Close();
                 
-            }                
+            }
+            Console.WriteLine("Database Tables created");
         }
 
         public void AddTranslatedMessage(TranslatedMessage message)

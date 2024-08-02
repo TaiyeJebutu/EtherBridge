@@ -13,19 +13,20 @@ namespace EtherBridge
         private string _customFormats;
         private Dictionary<int, XMLICDMessage> _messageMap = new Dictionary<int, XMLICDMessage>();
 
-        public Translator(List<XMLICDMessage> messages)        
+        public Translator()        
         {
-            CreateMessageMap(messages);
+            
             
         }
 
-        private void CreateMessageMap(List<XMLICDMessage> messages)
+        public void CreateMessageMap(List<XMLICDMessage> messages)
         {
             
             foreach(XMLICDMessage message in messages)
             {
                 _messageMap.Add(message.Header, message);
             }
+            Console.WriteLine("MessageMap Created");
         }
 
         public TranslatedMessage TranslateMessage(string text)

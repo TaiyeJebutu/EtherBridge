@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Data.Common;
+using System.Diagnostics.Metrics;
 using System.Linq.Expressions;
 using System.Net;
 using System.Reflection;
+using System.Xml;
 using EtherBridge;
 using EtherXMLReader;
 using Microsoft.Data.Sqlite;
@@ -75,20 +77,43 @@ namespace MyApp
         private bool _serverstarted;
         private Thread _menuThread;
         private Thread _serverThread;
-        
+
+        private DBManager _dBManager;
+        private Translator _translator = new Translator();
+        private List<XMLICDMessage> _icdMessages;
+        private EtherXMLReader.XMLReader _xmlReader;
+        private JSONTester _tester;
+
+
         public ConsoleMenu()
         {
-            Console.WriteLine("***Ether Bride Started***");
+             Console.WriteLine("***Ether Bride Started***");        
 
-             ipHost = Dns.GetHostEntry(Dns.GetHostName());
-             ipAddr = ipHost.AddressList[0];
-             server = new Server(ipAddr, 11111);
+            
 
+            // Generate ICDMessages
+            _xmlReader = new XMLReader("icd_config.xml");
+            GenerateICDMessages();
+
+            // Database
+            _dBManager = new DBManager();
+            SetupDatabase();
+
+            // JSON Tester
+            _tester = new JSONTester(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), _dBManager);
+            _tester.DeserialiseTests();
+
+            // Server infomation
+
+            ipHost = Dns.GetHostEntry(Dns.GetHostName());
+            ipAddr = ipHost.AddressList[0];
+            server = new Server(ipAddr, 11111, _translator, _dBManager);
             _serverstarted = false;
 
-             _menuThread = new Thread(new ThreadStart(DisplayOptions));           
+            // Threads
+            _menuThread = new Thread(new ThreadStart(DisplayOptions));           
 
-             _serverThread = new Thread(new ThreadStart(StartSever));
+             _serverThread = new Thread(new ThreadStart(server.Create));
 
             _menuThread.Start();
         }
@@ -97,18 +122,33 @@ namespace MyApp
         public void LoadServerConfig()
         {
             Console.WriteLine("Loading NetworkConfig");
+        }  
+        
+        private void SetupDatabase()
+        {
+            List<string> tables = new List<string>();
+            foreach (XMLICDMessage icdMessage in _icdMessages)
+            {
+                tables.Add(_dBManager.CreateDatabaseTableString(icdMessage));
+            }
+
+            _dBManager.CreateTable(tables);
         }
         
-        public void StartSever()        
+        private void GenerateICDMessages()
         {
-
-            server.Create();
-            _serverstarted = true;
+            _icdMessages = _xmlReader.GetICDMessages();
+            _translator.CreateMessageMap(_icdMessages);
         }
 
         public void CloseServer()
         {
             server.CloseServer();
+        }
+
+        public void StartServer()
+        {
+            _serverThread.Start();  
         }
 
         public void DisplayOptions()
@@ -139,17 +179,25 @@ namespace MyApp
                 case "1": 
                     if (_serverstarted) 
                     { 
-                        CloseServer(); 
+                        CloseServer();
+                        _serverstarted = false;
+                        DisplayOptions();
                     } else 
-                    { 
-                        _serverThread.Start(); 
+                    {
+                        StartServer();
+                        _serverstarted = true;
+                        DisplayOptions();
                     }
                     break;
                 case "2":
+                    _tester.RunTests();
+                    DisplayOptions();                   
+                    
                     break;
                 case "3":
                     shutdown = true;
-                    if (_serverstarted) { CloseServer(); }
+                    if (_serverstarted) { CloseServer();}
+                    DisplayOptions();
                     break;
             }
         }
