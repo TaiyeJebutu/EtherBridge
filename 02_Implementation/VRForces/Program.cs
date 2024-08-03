@@ -6,6 +6,16 @@ namespace VRForces
 {
     internal class Program
     {
+
+
+        static List<string> messsages = new List<string>()
+        {
+            "10101101",
+            "10100101",
+            "10100011",
+            "10101111",
+            "10100000",
+        };
         static void Main(string[] args)
         {
             ExecuteClient();
@@ -44,8 +54,14 @@ namespace VRForces
 
                     // Creation of message that
                     // we will send to Server
-                    byte[] messageSent = Encoding.ASCII.GetBytes("10101101<EOF>");
-                    int byteSent = sender.Send(messageSent);
+
+                    foreach(string message in Program.messsages)
+                    {
+                        byte[] messageSent = Encoding.ASCII.GetBytes(message + "<EOF>");
+                        int byteSent = sender.Send(messageSent);
+                        Thread.Sleep(3);
+                    }
+                    
 
 
                     // Close Socket using 

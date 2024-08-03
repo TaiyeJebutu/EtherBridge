@@ -64,7 +64,7 @@ namespace EtherBridge
             // data buffer
             byte[] bytes = new byte[1024];
             string data = null;
-            stillListening = true;
+            
 
             while (_serverStarted)
             {
@@ -77,7 +77,7 @@ namespace EtherBridge
             }
 
             if (_serverStarted) { Console.WriteLine($"Message Received -> {data}"); TranslateMessage(data); }
-            stillListening = false;
+            
         }
 
         public void CloseServer()
