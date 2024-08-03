@@ -11,6 +11,8 @@ namespace EtherBridge
     public class Translator
     {
         private string _customFormats;
+        private string _defaultFormat = "Default";
+        private string _TwosComplimentFormat = "Twos Compliment";
         private Dictionary<int, XMLICDMessage> _messageMap = new Dictionary<int, XMLICDMessage>();
 
         public Translator()        
@@ -65,16 +67,58 @@ namespace EtherBridge
             int startingbit = Int32.Parse(field._startingbit);
             int endingbit = Int32.Parse(field._endingbit);
             int resolution = Int32.Parse(field._resolution);
-            
+            string format = field._format;
             string binary = text.Substring(startingbit - 1, (endingbit - startingbit) + 1);
             //string binary = text.Substring(4, 2); 
-            int fieldValue = Convert.ToInt32(binary, 2);
-            fieldValue = fieldValue * resolution;
+
+
+            int fieldValue = int.MinValue;
+            
+            if (format == _defaultFormat)
+            {
+                fieldValue = Convert.ToInt32(binary, 2);
+                fieldValue = fieldValue * resolution;
+            }
+            if(format == _TwosComplimentFormat)
+            {
+                fieldValue = TwosCompliment(binary);
+                fieldValue = fieldValue * resolution;
+            }
+            
 
 
 
             translatedMessage.AddResult(fieldName, fieldValue.ToString());
 
+        }
+
+        private int TwosCompliment(string bits)
+        {
+            List<string> bitList = new List<string>();
+
+
+            foreach (char c in bits)
+            {
+                bitList.Add(c.ToString());
+            }
+
+            List<int> multipliers = new List<int>();
+            
+
+            for(int i = 1; i <= bits.Length; i = i*2)
+            {
+                multipliers.Add(i);
+            }
+            
+
+            int negative = multipliers[multipliers.Count - 1] * -1;
+            
+            for(int i = 1; i < bitList.Count; i++)
+            {
+                negative = negative + (Convert.ToInt32(bitList[i],2) * multipliers[i-1]);
+            }
+
+            return negative;
         }
     }
 }

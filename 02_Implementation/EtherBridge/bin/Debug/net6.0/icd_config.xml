@@ -3,7 +3,20 @@
   <Messages>
     <Message name = "Square" header ="10">
       <Field name = "Height" startingbit = "5" endingbit = "6" format = "Twos Compliment" customformat = "Null" resolution = "10"></Field>
-      <Field name = "Length" startingbit = "7" endingbit = "8" format = "Twos Compliment" customformat = "Null" resolution = "10"></Field>
+      <Field name = "Length" startingbit = "7" endingbit = "8" format = "Default" customformat = "Null" resolution = "10"></Field>
     </Message>
+
+    <Message name = "Triangle" header ="11">
+      <Field name = "Height" startingbit = "5" endingbit = "6" format = "Default" customformat = "Colours" resolution = "10"></Field>
+      <Field name = "Length" startingbit = "7" endingbit = "8" format = "Default" customformat = "Colours" resolution = "10"></Field>
+    </Message>
+
   </Messages>
+
+  <CustomFormats>
+    <Format name = "Colours">
+      <Details original = "10" new = "Red"></Details>
+      <Details original = "4" new = "Blue"></Details>
+    </Format>    
+  </CustomFormats>
 </ICD>

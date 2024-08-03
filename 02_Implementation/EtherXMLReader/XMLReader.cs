@@ -60,17 +60,11 @@ namespace EtherXMLReader
                         string endingbit = field.Attribute("endingbit").Value;
 
                         
-                        string? customformat = field.Attribute("customformat").Value;
+                        string customformat = field.Attribute("customformat").Value;                     
+                       
+                        string format = field.Attribute("format").Value;
+                        string resolution = field.Attribute("resolution").Value;
                         
-                        string? format = null;
-                        string? resolution = null;
-
-                        //check if a customformat exists
-                        if (customformat == "Null")
-                        {
-                            format = field.Attribute("format").Value;
-                            resolution = field.Attribute("resolution").Value;
-                        }
                         XMLFields msgField = new XMLFields(fieldName, startingbit, endingbit, format, customformat, resolution);
                         fieldsList.Add(msgField);
                     }
