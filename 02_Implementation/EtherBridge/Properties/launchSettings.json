@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "EtherBridge": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\taiye\\source\\repos\\TaiyeJebutu\\EtherBridge\\02_Implementation\\EtherBridge\\bin\\Debug\\net6.0\\icd_config.xml C:\\Users\\taiye\\source\\repos\\TaiyeJebutu\\EtherBridge\\02_Implementation\\EtherBridge\\bin\\Debug\\net6.0 C:\\Users\\taiye\\source\\repos\\TaiyeJebutu\\EtherBridge\\02_Implementation\\EtherBridge\\bin\\Debug\\net6.0\\network_config.xml"
+    }
+  }
+}

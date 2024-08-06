@@ -17,6 +17,7 @@ namespace EtherBridge
         private Regex _regex = new Regex("test.*json$");
         public List<JSONTest> Tests  = new List<JSONTest>();
         private DBManager _dbManager;
+        private Dictionary<string, bool> _results = new Dictionary<string, bool>();
 
         public JSONTester(string dir, DBManager dBManager) 
         { 
@@ -55,23 +56,40 @@ namespace EtherBridge
         public void RunTests()
         {
             Console.WriteLine("RUNNING TESTS\n");
-            foreach (JSONTest test in Tests)
+
+            using (var progress = new ProgressBar())
             {
-
-                bool result = false;
-
-                // Call the correct operatino based on the test type
-                switch(test.Test.Assertion.type)
+                int testNumber = 1;
+                foreach (JSONTest test in Tests)
                 {
-                    case "Equality":
-                        result = EqualityTest(test.Test.Assertion);
-                        break;
-                    case "Range":
-                        result = RangeTest(test.Test.Assertion);
-                        break;
+                    progress.Report((double) testNumber / Tests.Count);
+                    bool result = false;
+
+                    // Call the correct operatino based on the test type
+                    switch (test.Test.Assertion.type)
+                    {
+                        case "Equality":
+                            result = EqualityTest(test.Test.Assertion);
+                            break;
+                        case "Range":
+                            result = RangeTest(test.Test.Assertion);
+                            break;
+                    }
+                    _results.Add("(" + testNumber.ToString() + ")" + " " + test.Test.TestName, result);
+                   
+                    Thread.Sleep(30);
+                    testNumber++;
                 }
-                Console.WriteLine($"\t{test.Test.TestName}... {result}");
             }
+
+            foreach (KeyValuePair<string, bool> entry in _results)
+            {
+                string result;
+
+                if(entry.Value) { Console.ForegroundColor = ConsoleColor.DarkGreen; result = "PASS"; } else { Console.ForegroundColor = ConsoleColor.DarkRed; result = "FAIL"; }
+                Console.WriteLine($"\t{entry.Key}... {result}");
+            }
+            Console.ForegroundColor = ConsoleColor.Black;
         }
 
         public bool EqualityTest(Assertion test)

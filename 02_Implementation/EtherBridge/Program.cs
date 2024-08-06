@@ -17,51 +17,9 @@ namespace MyApp
         static void Main(string[] args)
         {
             
-            ConsoleMenu consoleMenu = new ConsoleMenu();
-
-
-            // Create Server
+            ConsoleMenu consoleMenu = new ConsoleMenu(args);
 
             
-
-
-            /*
-            // Read message icd
-
-            EtherXMLReader.XMLReader xmlReader = new XMLReader("icd_config.xml");
-            
-            // Generate internal message ICD
-            List<XMLICDMessage> icdMessages =  xmlReader.GetICDMessages();
-            Translator translator = new Translator(icdMessages);
-
-            TranslatedMessage result = translator.TranslateMessage("10101101");
-
-
-
-            // Create database
-
-            DBManager dBManager = new DBManager();
-            
-
-            List<string> tables = new List<string>();
-            foreach(XMLICDMessage icdMessage in icdMessages)
-            {
-                tables.Add(dBManager.CreateDatabaseTableString(icdMessage));
-            }  
-            
-            dBManager.CreateTable(tables);
-
-            dBManager.AddTranslatedMessage(result);
-
-            // Test values in database
-
-            JSONTester tester = new JSONTester(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), dBManager);
-            tester.DeserialiseTests();
-            tester.RunTests();
-
-
-
-            Console.WriteLine("\nProgram Ended"); */
         }  
 
     }
@@ -85,14 +43,22 @@ namespace MyApp
         private JSONTester _tester;
 
 
-        public ConsoleMenu()
-        {
-             Console.WriteLine("***Ether Bride Started***");        
+        private string _icd;
+        private string _testFileLocation;
+        private string _networkConfig;
+        
 
+        public ConsoleMenu(string[] args)
+        {
+            Console.WriteLine("***Ether Bride Started***");        
             
+            _icd = args[0];
+            _testFileLocation = args[1];
+            _networkConfig = args[2];
 
             // Generate ICDMessages
-            _xmlReader = new XMLReader("icd_config.xml", "network_config.xml");
+           
+            _xmlReader = new XMLReader(_icd, _networkConfig);
             GenerateICDMessages();          
 
 
@@ -101,7 +67,7 @@ namespace MyApp
             SetupDatabase();
 
             // JSON Tester
-            _tester = new JSONTester(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), _dBManager);
+            _tester = new JSONTester(_testFileLocation, _dBManager);
             _tester.DeserialiseTests();
 
             // Server infomation
