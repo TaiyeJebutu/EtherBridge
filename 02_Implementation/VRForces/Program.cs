@@ -55,13 +55,14 @@ namespace VRForces
                     // Creation of message that
                     // we will send to Server
 
-                    foreach(string message in Program.messsages)
+                    /*foreach(string message in Program.messsages)
                     {
                         byte[] messageSent = Encoding.ASCII.GetBytes(message + "<EOF>");
                         int byteSent = sender.Send(messageSent);
                         Thread.Sleep(3);
-                    }
-                    
+                    }*/
+                    byte[] messageSent = Encoding.ASCII.GetBytes("10101101<EOF>");
+                    int byteSent = sender.Send(messageSent);
 
 
                     // Close Socket using 

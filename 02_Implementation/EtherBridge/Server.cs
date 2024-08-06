@@ -16,8 +16,7 @@ namespace EtherBridge
         private bool _serverStarted;
         Socket _clientSocket;
 
-        Socket _listener;
-        private bool stillListening;
+        Socket _listener;       
         private Translator _translator;
         private DBManager _dbManager;
 
@@ -27,6 +26,7 @@ namespace EtherBridge
             _address = address;
             _ep = new IPEndPoint(address, port);
             _serverStarted = false;
+            Console.WriteLine("Creating Server-Client Connection");
             _listener = new Socket(_address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
             _translator = translator;
             _dbManager = dBManager;
@@ -45,11 +45,12 @@ namespace EtherBridge
 
                 Console.WriteLine("Waiting for client connection ....\n");
                 _clientSocket = _listener.Accept();
-
-                while (_serverStarted)
+                Console.WriteLine("Receiving Messaages");
+                while (isConnected(_clientSocket))
                 {                    
                     Listen(_clientSocket);
                 }
+                CloseServer();
                 
             }
             catch (Exception ex) 
@@ -66,7 +67,7 @@ namespace EtherBridge
             string data = null;
             
 
-            while (_serverStarted)
+            while (isConnected(clientSocket))
             {
                 int numByte = clientSocket.Receive(bytes);
 
@@ -76,19 +77,23 @@ namespace EtherBridge
                     break;
             }
 
-            if (_serverStarted) { Console.WriteLine($"Message Received -> {data}"); TranslateMessage(data); }
+            if (isConnected(clientSocket)) { Console.WriteLine($"Message Received -> {data}"); TranslateMessage(data); }
             
         }
 
         public void CloseServer()
         {
-            Console.WriteLine("Attempting to close the server ...");
-            _serverStarted = false;
+            Console.WriteLine("Attempting to close the server ...");            
 
             if(_clientSocket != null)
             {
                 _clientSocket.Shutdown(SocketShutdown.Both);
                 _clientSocket.Close();
+            }
+
+            if(_listener != null)
+            {
+                _listener.Close();
             }
             
         }
@@ -100,5 +105,14 @@ namespace EtherBridge
             _dbManager.AddTranslatedMessage(translatedMessage);
         }
 
+
+        private bool isConnected(Socket socket)
+        {
+            try
+            {
+                return !(socket.Poll(1, SelectMode.SelectRead) && socket.Available == 0);
+            }
+            catch (SocketException) { return false; }
+        }
     }
 }

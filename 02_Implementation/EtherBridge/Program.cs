@@ -105,17 +105,14 @@ namespace MyApp
 
             // Server infomation
 
+            Console.WriteLine("Loading Network Config");
             ipHost = Dns.GetHostEntry(Dns.GetHostName());
             ipAddr = ipHost.AddressList[0];
             server = new Server(ipAddr, 11111, _translator, _dBManager);
-            _serverstarted = false;
 
-            // Threads
-            _menuThread = new Thread(new ThreadStart(DisplayOptions));           
-
-             _serverThread = new Thread(new ThreadStart(server.Create));
-
-            _menuThread.Start();
+            server.Create();
+            _tester.RunTests();
+            
         }
 
 
@@ -126,6 +123,7 @@ namespace MyApp
         
         private void SetupDatabase()
         {
+            Console.WriteLine("Creating database tables");
             List<string> tables = new List<string>();
             foreach (XMLICDMessage icdMessage in _icdMessages)
             {
@@ -137,69 +135,10 @@ namespace MyApp
         
         private void GenerateICDMessages()
         {
+            Console.WriteLine("Loading ICD");
             _icdMessages = _xmlReader.GetICDMessages();
             _translator.CreateMessageMap(_icdMessages);
         }
-
-        public void CloseServer()
-        {
-            server.CloseServer();
-        }
-
-        public void StartServer()
-        {
-            _serverThread.Start();  
-        }
-
-        public void DisplayOptions()
-        {
-            while (!shutdown)
-            {
-                if (_serverstarted)
-                {
-                    Console.WriteLine($"\n [1] - Close Sever");
-                }
-                else { Console.WriteLine($"\n [1] - Start Sever"); }
-
-                Console.WriteLine($" [2] - Start Tests");
-                Console.WriteLine($" [3] - Shutdown");
-
-                Console.Write("\n:");
-                string input = Console.ReadLine();
-                Options(input);
-            }
-            
-            Console.WriteLine("Shutting down ...");
-        }
-
-        public void Options(string input)
-        {
-            switch (input)
-            {
-                case "1": 
-                    if (_serverstarted) 
-                    { 
-                        CloseServer();
-                        _serverstarted = false;
-                        DisplayOptions();
-                    } else 
-                    {
-                        StartServer();
-                        _serverstarted = true;
-                        DisplayOptions();
-                    }
-                    break;
-                case "2":
-                    _tester.RunTests();
-                    DisplayOptions();                   
-                    
-                    break;
-                case "3":
-                    shutdown = true;
-                    if (_serverstarted) { CloseServer();}
-                    DisplayOptions();
-                    break;
-            }
-        }
+        
     }
 }

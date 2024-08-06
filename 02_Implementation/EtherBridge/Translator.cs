@@ -27,8 +27,7 @@ namespace EtherBridge
             foreach(XMLICDMessage message in messages)
             {
                 _messageMap.Add(message.Header, message);
-            }
-            Console.WriteLine("MessageMap Created");
+            }           
         }
 
         public TranslatedMessage TranslateMessage(string text)

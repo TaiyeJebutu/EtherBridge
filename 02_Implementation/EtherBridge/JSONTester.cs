@@ -27,6 +27,7 @@ namespace EtherBridge
 
         private void GetTestFiles()
         {
+            Console.WriteLine("Loading test files");
             var matches = Directory.EnumerateFiles(_dir).Where(f => _regex.IsMatch(f));
             if(matches != null)
             {
