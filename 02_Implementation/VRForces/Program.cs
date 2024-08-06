@@ -32,7 +32,7 @@ namespace VRForces
                 // uses port 11111 on the local 
                 // computer.
                 IPHostEntry ipHost = Dns.GetHostEntry(Dns.GetHostName());
-                IPAddress ipAddr = ipHost.AddressList[0];
+                IPAddress ipAddr = IPAddress.Parse("127.0.0.1");
                 IPEndPoint localEndPoint = new IPEndPoint(ipAddr, 11111);
 
                 // Creation TCP/IP Socket using 

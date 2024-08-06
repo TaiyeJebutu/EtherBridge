@@ -92,8 +92,9 @@ namespace MyApp
             
 
             // Generate ICDMessages
-            _xmlReader = new XMLReader("icd_config.xml");
-            GenerateICDMessages();
+            _xmlReader = new XMLReader("icd_config.xml", "network_config.xml");
+            GenerateICDMessages();          
+
 
             // Database
             _dBManager = new DBManager();
@@ -104,11 +105,13 @@ namespace MyApp
             _tester.DeserialiseTests();
 
             // Server infomation
+           
+            ServerConfig serverConfig = _xmlReader.GetServerConfig();
 
-            Console.WriteLine("Loading Network Config");
+            if (serverConfig.Port == null | serverConfig.ServerAddress == null) { Forceshutdown("Error occured while trying to read IP address or Port"); }
             ipHost = Dns.GetHostEntry(Dns.GetHostName());
             ipAddr = ipHost.AddressList[0];
-            server = new Server(ipAddr, 11111, _translator, _dBManager);
+            server = new Server(serverConfig, _translator, _dBManager);
 
             server.Create();
             _tester.RunTests();
@@ -138,7 +141,12 @@ namespace MyApp
             Console.WriteLine("Loading ICD");
             _icdMessages = _xmlReader.GetICDMessages();
             _translator.CreateMessageMap(_icdMessages);
-        }
+        }        
         
+        private void Forceshutdown(string reason)
+        {
+            Environment.FailFast(reason);
+
+        }
     }
 }

@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using EtherXMLReader;
 
 namespace EtherBridge
 {
@@ -20,11 +21,11 @@ namespace EtherBridge
         private Translator _translator;
         private DBManager _dbManager;
 
-        public Server(IPAddress address, int port, Translator translator, DBManager dBManager) 
+        public Server(ServerConfig serverConfig, Translator translator, DBManager dBManager) 
         
         {            
-            _address = address;
-            _ep = new IPEndPoint(address, port);
+            _address = serverConfig.ServerAddress;
+            _ep = new IPEndPoint(serverConfig.ServerAddress, serverConfig.Port);
             _serverStarted = false;
             Console.WriteLine("Creating Server-Client Connection");
             _listener = new Socket(_address.AddressFamily, SocketType.Stream, ProtocolType.Tcp);

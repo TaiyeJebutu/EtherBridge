@@ -1,4 +1,4 @@
-<!-- Clients to be mirrored for EtherBridge-->
+<!-- ICD for message structure-->
 <ICD>
   <Messages>
     <Message name = "Square" header ="10">

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
@@ -7,24 +8,25 @@ namespace EtherXMLReader
 {
     public class XMLReader
     {
-        private readonly string _clientsParam = "Clients";
-        private readonly string _clientParam = "Client";
+        
         private readonly string _MessagesParam = "Message";
         private readonly string _FieldParam = "Field";
-        private readonly string _byteOrderMarkUtf8 = Encoding.UTF8.GetString(Encoding.UTF8.GetPreamble());
+        private readonly string _ServerParam = "Server";
+       
 
 
-        private XDocument? _document;
+        private XDocument? _icd;
+        private XDocument? _network;
 
         public XDocument Document
         {
-            get { return _document; }
+            get { return _icd; }
         }
-        public XMLReader(string xml)         
+        public XMLReader(string xml, string network)         
         {
             
-            _document = XDocument.Load(xml);
-            
+            _icd = XDocument.Load(xml);
+            _network = XDocument.Load(network);
             
 
         }
@@ -34,9 +36,9 @@ namespace EtherXMLReader
         {
             List < XMLICDMessage > icdMessages = new List<XMLICDMessage> ();
 
-            if (_document != null)
+            if (_icd != null)
             {
-                var messages = _document.Descendants(_MessagesParam).ToList();
+                var messages = _icd.Descendants(_MessagesParam).ToList();
 
                 // Loop through every type of message
                 foreach (var message in messages)
@@ -76,24 +78,22 @@ namespace EtherXMLReader
             return icdMessages;
         }
 
-        public List<XMLClients> GetClients()
+        public ServerConfig GetServerConfig()
         {
-            List<XMLClients> clients = new List<XMLClients>();
-
-            if (_document != null)
+            ServerConfig serverConfig = new ServerConfig();
+            Console.WriteLine("Loading Network Config");
+            if(_network != null)
             {
-                var xClients = _document.Descendants(_clientParam).ToList();
-               
+                var serverDetails = _network.Descendants(_ServerParam).ToList()[0];
 
-                foreach ( var xclient in xClients)
-                {
-                    XMLClients client = new XMLClients(xclient);
-                    clients.Add(client);
-                }
+                string ip = serverDetails.Attribute("IP").Value;
+                string port = serverDetails.Attribute("Port").Value;
 
-            }
+                serverConfig.Port = Int32.Parse(port);
+                serverConfig.ServerAddress = IPAddress.Parse(ip);
+            }          
 
-            return clients;
+            return serverConfig;
         }
 
     }
