@@ -18,11 +18,13 @@ namespace EtherBridge
         public List<JSONTest> Tests  = new List<JSONTest>();
         private DBManager _dbManager;
         private Dictionary<string, bool> _results = new Dictionary<string, bool>();
+        private Translator _translator;
 
-        public JSONTester(string dir, DBManager dBManager) 
+        public JSONTester(string dir, DBManager dBManager, Translator translator) 
         { 
             _dir = dir;
             _dbManager = dBManager;
+            _translator = translator;
             GetTestFiles();
         }
 
@@ -89,22 +91,37 @@ namespace EtherBridge
                 if(entry.Value) { Console.ForegroundColor = ConsoleColor.DarkGreen; result = "PASS"; } else { Console.ForegroundColor = ConsoleColor.DarkRed; result = "FAIL"; }
                 Console.WriteLine($"\t{entry.Key}... {result}");
             }
-            Console.ForegroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         public bool EqualityTest(Assertion test)
         {
             string tablename = test.messagename;
             string fieldname = test.fieldname;
-            double fieldvalue = double.Parse(test.fieldvalue, System.Globalization.CultureInfo.InvariantCulture);
+            bool testResult = false;
 
-            string query = $"SELECT COUNT(*) FROM {tablename} where {fieldname}={fieldvalue}";
+            if (IsNumeric(test))
+            {
+                double fieldvalue = double.Parse(test.fieldvalue, System.Globalization.CultureInfo.InvariantCulture);
 
+                string query = $"SELECT COUNT(*) FROM {tablename} where {fieldname}={fieldvalue}";
+                testResult = _dbManager.Query(query);
+            }
+            else
+            {
+                Tuple<bool,double> result = _translator.FindOringialCustomFormatRepresentation(test.messagename,test.fieldname, test.fieldvalue);
+                if (result.Item1)
+                {
+                    string query = $"SELECT COUNT(*) FROM {tablename} where {fieldname}={result.Item2}";
+                    testResult = _dbManager.Query(query);
+                }
+                else
+                {
+                    return testResult;
+                }
+            }
 
-
-            bool result = _dbManager.Query(query);
-
-            return result;
+            return testResult;
         }
 
         public bool RangeTest(Assertion test) 
@@ -124,5 +141,14 @@ namespace EtherBridge
 
             return result;
         }
+
+
+        private bool IsNumeric(Assertion test)
+        {
+            bool isNumeric = double.TryParse(test.fieldvalue, out _);
+            return isNumeric;
+        }
+
+        
     }
 }

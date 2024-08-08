@@ -1,17 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace EtherXMLReader
 {
     public class XMLReader
     {
         
-        private readonly string _MessagesParam = "Message";
+        private readonly string _MessageParam = "Message";
         private readonly string _FieldParam = "Field";
         private readonly string _ServerParam = "Server";
+        private readonly string _CustomFormatsParam = "Format";
+        private readonly string _DetailsParam = "Details";
        
 
 
@@ -38,7 +42,7 @@ namespace EtherXMLReader
 
             if (_icd != null)
             {
-                var messages = _icd.Descendants(_MessagesParam).ToList();
+                var messages = _icd.Descendants(_MessageParam).ToList();
 
                 // Loop through every type of message
                 foreach (var message in messages)
@@ -77,6 +81,42 @@ namespace EtherXMLReader
             }
             return icdMessages;
         }
+
+
+        public List<Formats> GetCustomFormats()
+        {
+            List<Formats> listOfFormats = new List<Formats>();
+
+            if(_icd != null)
+            {
+                var icdCustomFormats = _icd.Descendants(_CustomFormatsParam).ToList();
+
+                foreach(var _format in icdCustomFormats)
+                {
+                    string formatName = _format.Attribute("name").Value;
+                    
+                    Formats format = new Formats(formatName);
+
+                    var icddetails = _format.Descendants(_DetailsParam).ToList();
+
+                    
+
+                    foreach(var detail in icddetails)
+                    {
+                        double original = double.Parse(detail.Attribute("original").Value, System.Globalization.CultureInfo.InvariantCulture);
+                        string newValue = detail.Attribute("new").Value;
+
+                        Details details = new Details(original, newValue);
+                        format.details.Add(details);
+                    }
+                    listOfFormats.Add(format);
+
+                }
+            }
+
+            return listOfFormats;
+        }
+
 
         public ServerConfig GetServerConfig()
         {

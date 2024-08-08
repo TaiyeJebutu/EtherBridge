@@ -1,0 +1,36 @@
+[     
+    {
+        "Test":{
+            "TestName" : "Test that Triangle is Red",
+            "Assertion": {
+                "type" : "Equality",
+                "messagename": "Triangle",
+                "fieldname": "Height",
+                "fieldvalue": "Red"
+                }
+        }
+    },
+    {
+        "Test":{
+            "TestName" : "Test that Triangle is Green",
+            "Assertion": {
+                "type" : "Equality",
+                "messagename": "Triangle",
+                "fieldname": "Length",
+                "fieldvalue": "Green"
+                }
+        }
+    },
+    {
+        "Test":{
+            "TestName" : "Test that Triangle is Blue",
+            "Assertion": {
+                "type" : "Equality",
+                "messagename": "Triangle",
+                "fieldname": "Height",
+                "fieldvalue": "Blue"
+                }
+        }
+    }
+    
+]

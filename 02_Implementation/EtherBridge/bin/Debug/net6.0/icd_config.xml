@@ -7,15 +7,18 @@
     </Message>
 
     <Message name = "Triangle" header ="11">
-      <Field name = "Height" startingbit = "5" endingbit = "6" format = "Default" customformat = "Colours" resolution = "10"></Field>
-      <Field name = "Length" startingbit = "7" endingbit = "8" format = "Default" customformat = "Colours" resolution = "10"></Field>
+      <Field name = "Height" startingbit = "5" endingbit = "6" format = "Default" customformat = "Colours" resolution = "1"></Field>
+      <Field name = "Length" startingbit = "7" endingbit = "8" format = "Default" customformat = "Colours" resolution = "1"></Field>
     </Message>
 
   </Messages>
 
   <CustomFormats>
     <Format name = "Colours">
-      <Details original = "10" new = "Red"></Details>
+      <Details original = "0" new = "Red"></Details>
+      <Details original = "1" new = "Orange"></Details>
+      <Details original = "2" new = "Yellow"></Details>
+      <Details original = "3" new = "Green"></Details>
       <Details original = "4" new = "Blue"></Details>
     </Format>    
   </CustomFormats>

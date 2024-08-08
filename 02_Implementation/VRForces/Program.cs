@@ -15,10 +15,34 @@ namespace VRForces
             "10100011",
             "10101111",
             "10100000",
+            "10110000",
+            "10111101",
+            "10110101",
+            "10110011",
+            "10111111",
         };
         static void Main(string[] args)
         {
             ExecuteClient();
+        }
+
+        static string GenrateRandomMessage()
+        {
+            string tenHeader = "1010";
+            string elevenHeader = "1011";
+
+            string value = "";
+            Random rnd = new Random();
+
+            for(int i = 0; i < 4; i++) 
+            {
+                value += rnd.Next(1).ToString();
+            }
+            int choice = rnd.Next(10,11);
+            string result;
+            if (choice == 10) { result = tenHeader + value; } else { result = elevenHeader + value; }
+
+            return result;
         }
 
         static void ExecuteClient()
@@ -55,15 +79,22 @@ namespace VRForces
                     // Creation of message that
                     // we will send to Server
 
-                    /*foreach(string message in Program.messsages)
+                    foreach(string message in Program.messsages)
                     {
                         byte[] messageSent = Encoding.ASCII.GetBytes(message + "<EOF>");
                         int byteSent = sender.Send(messageSent);
                         Thread.Sleep(3);
-                    }*/
-                    byte[] messageSent = Encoding.ASCII.GetBytes("10101101<EOF>");
-                    int byteSent = sender.Send(messageSent);
+                    }
 
+                    /*for(int i = 0;i < 10;i++)
+                    {
+                        byte[] messageSent = Encoding.ASCII.GetBytes($"{GenrateRandomMessage()}<EOF>");
+                        int byteSent = sender.Send(messageSent);
+                    }*/
+
+                    /*byte[] messageSent = Encoding.ASCII.GetBytes($"10101101<EOF>");
+                    int byteSent = sender.Send(messageSent);
+                    Thread.Sleep(15000);*/
 
                     // Close Socket using 
                     // the method Close()

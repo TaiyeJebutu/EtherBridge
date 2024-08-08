@@ -10,10 +10,11 @@ namespace EtherBridge
 {
     public class Translator
     {
-        private string _customFormats;
+        
         private string _defaultFormat = "Default";
         private string _TwosComplimentFormat = "Twos Compliment";
         private Dictionary<int, XMLICDMessage> _messageMap = new Dictionary<int, XMLICDMessage>();
+        private Dictionary<string, List<Details>> _customFormatMap = new Dictionary<string, List<Details>>();
 
         public Translator()        
         {
@@ -50,11 +51,8 @@ namespace EtherBridge
             // Translate each field in the message
             foreach (XMLFields field in message.Fields)
             {
-                TranslateMessageField(translatedMessage, text, field);
-            }
+                TranslateMessageField(translatedMessage, text, field);          }
 
-
-            
 
 
             return translatedMessage;
@@ -118,6 +116,72 @@ namespace EtherBridge
             }
 
             return negative;
+        }
+
+
+        public void CreateCustomFormatMap(List<Formats> formats)
+        {
+            foreach(Formats format in formats)
+            {
+                _customFormatMap.Add(format.Name, format.details);
+            }
+        }
+
+        public Tuple<bool,double> FindOringialCustomFormatRepresentation(string messageName, string fieldName, string stringValueRepresentation)
+        {
+            double result;
+            bool foundMatchingRepresentaton = false;
+
+            Tuple<bool, double> returnResult = new Tuple<bool, double> ( false, 0 );
+
+            // Find the correct Message structure to be queried
+            foreach (KeyValuePair<int,XMLICDMessage> entry in _messageMap) 
+            {
+                if (foundMatchingRepresentaton) { break; }
+
+                if (entry.Value.Name == messageName)
+                {
+                    XMLICDMessage xMLICDMessage = entry.Value;
+                    // Find the correct field to be queried
+                    foreach(var field in xMLICDMessage.Fields)
+                    {
+                        if(field._customformat != null)
+                        {
+                            try
+                            {
+                                // Find the customformat that is linked to the field being queried
+                                List<Details> details = _customFormatMap[field._customformat];
+
+                                // Find the matching stringValue representation in the matching details
+                                if (foundMatchingRepresentaton) { break; }
+                                
+                                foreach(Details _detail in details)
+                                {
+                                    if(stringValueRepresentation == _detail.NewValue)
+                                    {
+                                        foundMatchingRepresentaton = true;
+                                        result = _detail.OriginalValue;
+                                        returnResult = Tuple.Create(foundMatchingRepresentaton, result);
+                                        break;
+                                    }                                    
+                                }                                
+
+
+                            }catch(Exception ex)
+                            {
+                                Console.WriteLine(ex.ToString());
+                            }
+                        }
+                        else
+                        {
+                            throw new Exception($"Fieldname {fieldName} in message '{messageName}' does not contain a valid customformat");
+                        }
+                    }
+                    break;
+                }
+            }
+
+            return returnResult; 
         }
     }
 }

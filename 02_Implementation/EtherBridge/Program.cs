@@ -39,6 +39,7 @@ namespace MyApp
         private DBManager _dBManager;
         private Translator _translator = new Translator();
         private List<XMLICDMessage> _icdMessages;
+        private List<Formats> _icdCustomFormats;
         private EtherXMLReader.XMLReader _xmlReader;
         private JSONTester _tester;
 
@@ -59,7 +60,7 @@ namespace MyApp
             // Generate ICDMessages
            
             _xmlReader = new XMLReader(_icd, _networkConfig);
-            GenerateICDMessages();          
+            LoadICD();          
 
 
             // Database
@@ -67,7 +68,7 @@ namespace MyApp
             SetupDatabase();
 
             // JSON Tester
-            _tester = new JSONTester(_testFileLocation, _dBManager);
+            _tester = new JSONTester(_testFileLocation, _dBManager, _translator);
             _tester.DeserialiseTests();
 
             // Server infomation
@@ -102,11 +103,13 @@ namespace MyApp
             _dBManager.CreateTable(tables);
         }
         
-        private void GenerateICDMessages()
+        private void LoadICD()
         {
             Console.WriteLine("Loading ICD");
             _icdMessages = _xmlReader.GetICDMessages();
+            _icdCustomFormats = _xmlReader.GetCustomFormats();
             _translator.CreateMessageMap(_icdMessages);
+            _translator.CreateCustomFormatMap(_icdCustomFormats);
         }        
         
         private void Forceshutdown(string reason)

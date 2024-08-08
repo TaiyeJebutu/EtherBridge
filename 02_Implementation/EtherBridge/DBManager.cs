@@ -15,10 +15,22 @@ namespace EtherBridge
         public DBManager(){
             
         }
-       
+        
+        private void RemoveOldDatabase()
+        {
+            if (File.Exists(_database))
+            {
+                Console.WriteLine("Removing Old Database");
+                File.Delete(_database);
+            }
+        }
 
         public void CreateTable(List<String> tables)
         {
+
+            // Remove old file if it exists
+            RemoveOldDatabase();
+            
             using (var conn = new SqliteConnection($"Data Source={DBManager._database}"))
             {
                 conn.Open();
