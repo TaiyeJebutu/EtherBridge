@@ -42,7 +42,7 @@ namespace EtherBridge
                     try
                     {
                         sqlite_cmd.CommandText = table;
-                        sqlite_cmd.ExecuteNonQuery();
+                        sqlite_cmd.ExecuteNonQuery();  
                     }catch (SqliteException ex)
                     {
                         //

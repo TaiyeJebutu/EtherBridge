@@ -78,7 +78,9 @@ namespace EtherBridge
                     break;
             }
 
-            if (isConnected(clientSocket)) { Console.WriteLine($"Message Received -> {data}"); TranslateMessage(data); }
+            if (isConnected(clientSocket)) {
+               // Console.WriteLine($"Message Received -> {data}"); 
+                TranslateMessage(data); }
             
         }
 

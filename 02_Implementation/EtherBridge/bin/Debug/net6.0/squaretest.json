@@ -1,7 +1,7 @@
 [     
     {
         "Test":{
-            "TestName" : "Test that exact values have been receieved",
+            "TestName" : "Test that Square has a height of 30",
             "Assertion": {
                 "type" : "Equality",
                 "messagename": "Square",
@@ -12,13 +12,36 @@
     },
     {
         "Test":{
-            "TestName" : "Test that value received is within certain range",
+            "TestName" : "Test that Square has a height of -30",
+            "Assertion": {
+                "type" : "Equality",
+                "messagename": "Square",
+                "fieldname": "Height",
+                "fieldvalue": "-30"
+                }
+        }
+    },
+    {
+        "Test":{
+            "TestName" : "Test that Square has a Length greater than 0 and less than 30",
+            "Assertion": {
+                "type" : "Range",
+                "messagename": "Square",
+                "fieldname": "Length",
+                "lessthan": "30",
+                "greaterthan": "0"
+                    }
+        }
+    },
+    {
+        "Test":{
+            "TestName" : "Test that Square has a Length greater than 10 and less than 20",
             "Assertion": {
                 "type" : "Range",
                 "messagename": "Square",
                 "fieldname": "Length",
                 "lessthan": "20",
-                "greaterthan": "5"
+                "greaterthan": "10"
                     }
         }
     }

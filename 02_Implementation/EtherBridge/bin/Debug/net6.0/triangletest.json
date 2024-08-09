@@ -1,34 +1,69 @@
 [     
     {
         "Test":{
-            "TestName" : "Test that Triangle is Red",
+            "TestName" : "Test that Triangle has an Edge Colour of Red",
             "Assertion": {
                 "type" : "Equality",
                 "messagename": "Triangle",
-                "fieldname": "Height",
+                "fieldname": "EdgeColour",
                 "fieldvalue": "Red"
                 }
         }
     },
     {
         "Test":{
-            "TestName" : "Test that Triangle is Green",
+            "TestName" : "Test that Triangle has a Fill Colour of Green",
             "Assertion": {
                 "type" : "Equality",
                 "messagename": "Triangle",
-                "fieldname": "Length",
+                "fieldname": "FillColour",
                 "fieldvalue": "Green"
                 }
         }
     },
     {
         "Test":{
-            "TestName" : "Test that Triangle is Blue",
+            "TestName" : "Test that Triangle has a Fill Colour of Yellow",
             "Assertion": {
                 "type" : "Equality",
                 "messagename": "Triangle",
-                "fieldname": "Height",
-                "fieldvalue": "Blue"
+                "fieldname": "FillColour",
+                "fieldvalue": "Yellow"
+                }
+        }
+    },
+    {
+        "Test":{
+            "TestName" : "Test that Triangle has a Edge Colour of Yellow",
+            "Assertion": {
+                "type" : "Equality",
+                "messagename": "Triangle",
+                "fieldname": "EdgeColour",
+                "fieldvalue": "Yellow"
+                }
+        }
+    },
+    {
+        "Test":{
+            "TestName" : "Test that Triangle has an EdgeColour less than 3 and greater than 1",
+            "Assertion": {
+                "type" : "Range",
+                "messagename": "Triangle",
+                "fieldname": "EdgeColour",
+                "lessthan": "3",
+                "greaterthan": "1"
+                }
+        }
+    },
+    {
+        "Test":{
+            "TestName" : "Test that Triangle has an EdgeColour less than 4 and greater than 2",
+            "Assertion": {
+                "type" : "Range",
+                "messagename": "Triangle",
+                "fieldname": "EdgeColour",
+                "lessthan": "4",
+                "greaterthan": "2"
                 }
         }
     }
